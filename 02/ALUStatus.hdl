@@ -1,0 +1,11 @@
+CHIP ALUStatus {
+    IN in[16];
+    OUT zr, ng;
+
+    PARTS:
+    Or8Way(in=in[0..7], out=lowNonZero);
+    Or8Way(in=in[8..15], out=highNonZero);
+    Or(a=lowNonZero, b=highNonZero, out=outIsNonZero);
+    Not(in=outIsNonZero, out=zr);
+    Or(a=in[15], b=false, out=ng);
+}
